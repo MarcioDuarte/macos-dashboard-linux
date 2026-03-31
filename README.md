@@ -2,7 +2,7 @@
 
 > Um widget de produtividade e telemetria de hardware escrito em Electron, focado em performance absoluta, renderização sem frameworks e integração profunda com o sistema operacional (Wayland/X11).
 
-![Dashboard Screenshot](./images/screenshot.png) 
+![Dashboard Screenshot](./screenshot.png) 
 
 ## 🏗️ Arquitetura e Decisões de Engenharia
 
