@@ -17,8 +17,8 @@ O consumo de CPU, RAM, uso de disco, status de rede e o Uptime absoluto dos proc
 ### 2. Motor Geométrico Dinâmico (Clima)
 Para replicar a interface de barras de temperatura da Apple de forma funcional (e não apenas estética), foi desenvolvido um algoritmo matemático que calcula a amplitude térmica da semana e injeta os percentuais de largura e margem esquerda dinamicamente no CSS.
 * A posição e o tamanho de cada barra são calculados usando interpolação linear básica: 
-$W_{\%} = \frac{T_{max} - T_{min}}{Amplitude_{total}} \times 100$ 
-$L_{\%} = \frac{T_{min} - T_{absoluta}}{Amplitude_{total}} \times 100$.
+  `Largura (%) = ((T_max - T_min) / Amplitude_total) * 100` e 
+  `Margem Esquerda (%) = ((T_min - T_absoluta) / Amplitude_total) * 100`.
 
 ### 3. Blindagem de File System (ASAR Protection)
 Aplicativos empacotados pelo `electron-builder` rodam a partir de um arquivo read-only (`app.asar`), o que quebra tentativas de gravação em arquivos locais como `.json`.
