@@ -1,0 +1,14 @@
+# Dependências do Node
+node_modules/
+
+# Binários e pacotes compilados
+dist/
+build/
+
+# Logs e arquivos de sistema
+debug.log
+.DS_Store
+
+# Cofres e dados dinâmicos do usuário
+config.json
+events.json

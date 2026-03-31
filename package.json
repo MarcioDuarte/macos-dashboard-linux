@@ -1,0 +1,33 @@
+{
+  "name": "macos-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard de produtividade nativo estilo macOS",
+  "main": "main.js",
+  "homepage": "https://github.com/MarcioDuarte/macos-dashboard",
+  "author": {
+    "name": "Márcio Dias",
+    "email": "marciodiasduarte@gmail.com"
+  },
+  "scripts": {
+    "start": "electron . --no-sandbox",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.marcio.dashboard",
+    "productName": "MacOS Dashboard",
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "Utility",
+      "maintainer": "Márcio Dias <marciodiasduarte@gmail.com>"
+    }
+  },
+  "dependencies": {
+    "systeminformation": "^5.25.0"
+  },
+  "devDependencies": {
+    "electron": "^29.4.6",
+    "electron-builder": "^26.8.1"
+  }
+}

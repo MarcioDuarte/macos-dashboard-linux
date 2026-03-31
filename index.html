@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HiTab Style Dashboard</title>
+<style>
+  /* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: url('images/back.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #ddd;
+}
+
+/* O Grid Principal Refatorado */
+.dashboard {
+	margin-top: 2vh;
+	display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    align-items: flex-end;
+	height: 1080px;
+	flex-wrap: wrap;
+}
+
+/* A ÂNCORA e o ENVELOPADOR (Arquitetura Universal) */
+.weather-widget, .clock-widget, .calendar-widget, .system-widget {
+    position: relative;
+}
+
+.widget-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	
+}
+
+
+/* -------------------------------------
+   2. WIDGET: RELÓGIO
+------------------------------------- */
+.clock-widget {
+    background: #2c2c2e;
+    border-radius: 24px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: 330px;
+    margin: 0 !important;
+    min-height: 158px;
+	height: 158px
+}
+
+.time-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-top: -6%;
+}
+
+.main-time {
+    font-size: 5.5rem;
+    letter-spacing: -2px;
+    color: white;
+    font-family: "Fjalla One", sans-serif;
+}
+
+.seconds {
+    font-size: 3.3rem;
+    margin-left: 2px;
+    color: white;
+    font-family: "Fjalla One", sans-serif;
+}
+
+.info-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #878787;
+    padding-top: 10px;
+    color: white;
+}
+
+.location-name {
+    font-size: 0.9rem;
+    text-align: right;
+    color: white;
+    width: 100%;
+    margin-right: 20px;
+	font-weight: 700;
+}
+
+.timezone {
+    font-size: 0.9rem;
+    margin: 0;
+    color: white;
+	width: 100%;
+}
+
+/* -------------------------------------
+   3. WIDGET: CALENDÁRIO
+------------------------------------- */
+.calendar-widget {
+    background-color: #1c1c1e;
+    color: white;
+    border-radius: 24px;
+    padding: 25px;
+    width: 100%;
+    display: flex;
+    font-family: -apple-system, sans-serif;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin: 0 !important;
+    min-height: 200px;
+    height: 200px;
+}
+
+.date-highlight {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: black;
+    margin: -25px 0 -26px -24px;
+    border-radius: 24px 0 0 24px;
+}
+
+.blue-text { 
+    color: #ff3b30 !important; 
+    text-transform: uppercase; 
+    font-size: 1.4rem; 
+    margin: 0; 
+    font-weight: 500; 
+    text-align: center; 
+}
+
+#month-name { 
+    font-size: 1.2rem; 
+    margin: 10px 0 5px 0; 
+    font-weight: 500; 
+    text-align: center; 
+}
+
+#day-number { 
+    font-size: 5rem; 
+    margin: 0; 
+    font-weight: 500; 
+    text-align: center; 
+}
+
+.month-grid {
+    flex: 1.2;
+    padding-left: 21px;
+    margin-top: -2px;
+}
+
+.days-header, .days-numbers {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    gap: 0px 5px;
+}
+
+.days-header {
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+    margin-top: -13px;
+}
+
+.days-numbers {
+    font-size: 0.9rem;
+    color: #999;
+    margin-top: -8px;
+}
+
+.days-numbers span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+}
+
+.current-day {
+    background-color: #007aff !important;
+    color: white !important;
+}
+
+
+
+ /* O Novo Contêiner Apple Style */
+        .apple-weather-widget {
+            background: #2c2c2e;
+            /* Cor base do modelo */
+            border-radius: 22px;
+            padding: 20px;
+            color: white;
+            width: 330px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+			height:330px
+        }
+
+        /* 1. Header (Top) */
+        .aw-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+			margin-top: -15px;
+        }
+
+        .aw-city {
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .aw-temp {
+            font-size: 58px;
+            font-weight: 300;
+            line-height: 1;
+            margin-top: -5px;
+        }
+
+        .aw-cond-box {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .aw-cond-icon {
+            width: 28px;
+            height: 28px;
+            margin-bottom: 2px;
+        }
+
+        .aw-cond-text {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .aw-cond-hl {
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* Linhas Divisórias Translúcidas */
+        .aw-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+        }
+
+        /* 2. Previsão por Hora (Horizontal Flex) */
+        .aw-hourly {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2px;
+        }
+
+        .aw-hour-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;            
+        }
+
+        .aw-hour-time {
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .aw-hour-icon {
+            width: 22px;
+            height: 22px;
+        }
+
+        .aw-hour-temp {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* 3. Previsão Diária (Lista com Barras) */
+        .aw-daily {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .aw-day-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .aw-day-name {
+            width: 40px;
+            opacity: 0.9;
+        }
+
+        .aw-day-icon {
+            width: 22px;
+            height: 22px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .aw-day-min {
+            width: 25px;
+            text-align: right;
+            opacity: 0.7;
+			margin-left: 15px;
+        }
+
+        .aw-day-max {
+            width: 25px;
+            text-align: right;
+        }
+
+        /* A Engenharia da Barra de Temperatura */
+        .aw-temp-bar {
+            flex-grow: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 29%);
+            border-radius: 2px;
+            margin: 0 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aw-temp-fill {
+            position: absolute;
+            height: 100%;
+            border-radius: 2px;
+            /* Gradiente simulando a imagem. O left/width será injetado via JS */
+            background: linear-gradient(90deg, #81c784 0%, #ffd54f 100%);
+        }
+		.divider {
+		  display: block;
+		  margin-top: 2px;
+		  margin-bottom: 0.5em;
+		  margin-left: auto;
+		  margin-right: auto;
+		  border-style: inset;
+		  border-width: 1px;
+		  width: 100%;
+		  border-color: rgba(255, 255, 255, 0.2);
+		}
+		  /* O Contêiner Principal */
+.mac-calendar-widget {
+    background-color: #2c2c2e; /* Cinza escuro específico do macOS */
+    color: white;
+    border-radius: 22px; /* Curvatura mais acentuada da Apple */
+    padding: 12px 15px;
+    width: 330px;
+    height: 158px; /* Mantém a altura padrão do seu dashboard */
+    display: flex;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+}
+
+/* Cor de Destaque Universal (Vermelho Apple) */
+.mc-red-text {
+    color: #ff453a;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: -4px 0px 5px 8px;
+}
+
+/* Coluna Esquerda (1/3) */
+.mc-left {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#mc-day-number {
+    font-size: 54px;
+    font-weight: 300; /* Tipografia fina da Apple */
+    line-height: 1;
+    margin: 0 0 auto 0; /* Empurra o texto de baixo para o fim */
+}
+
+.mc-events-text {
+    font-size: 13px;
+    color: #98989d;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Coluna Direita (2/3) */
+.mc-right {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.mc-grid-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    color: #757575;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    margin-top: 1px;
+}
+
+.mc-grid-numbers {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    gap: 1px 5px; /* Reduzi o gap para simular a densidade da imagem */
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.mc-grid-numbers span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 19px;
+    width: 19px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.mc-current-day {
+    background-color: #ff453a;
+    color: white;
+    font-weight: 600;
+}
+
+
+
+
+
+
+/* A Fundação Estética do macOS Dark Mode */
+.eul-widget {
+    background-color: #2c2c2e; /* Fundo base escuro */
+    border-radius: 22px;
+    padding: 15px;
+    width: 330px;
+	
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #e0e0e0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+/* Os Cards Internos */
+.eul-card {
+    background-color: #3d3d3d;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.eul-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.eul-val { font-weight: 500; font-size: 14px; }
+.eul-label { font-size: 11px; color: #888; margin-bottom: 3px;}
+
+/* Barras de Progresso */
+.eul-progress-bg {
+    background-color: #1a1a20;
+    height: 6px;
+    border-radius: 3px;
+    width: 150px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+.eul-progress-fill {
+    background-color: #ffffff;
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+/* Grids Internos */
+.eul-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.eul-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    text-align: right;
+}
+
+/* Lista de Processos */
+.eul-proc-list {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12px;
+}
+.eul-proc-item {
+    display: flex;
+    justify-content: space-between;
+    color: #aaa;
+}
+
+</style>
+</head>
+<body>
+
+
+
+<!-- Dashboard -->
+<div class="dashboard">
+<div>
+<div class="eul-widget">
+    
+    <div class="eul-card">
+        <div class="eul-card-title">
+            <span>CPU</span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="eul-progress-bg"><div class="eul-progress-fill" id="eul-cpu-bar"></div></div>
+                <span id="eul-cpu-total">0%</span>
+            </div>
+        </div>
+        <div class="eul-grid-4">
+            <div><div class="eul-label">System</div><div class="eul-val" id="eul-cpu-sys">0%</div></div>
+            <div><div class="eul-label">User</div><div class="eul-val" id="eul-cpu-user">0%</div></div>
+            <div><div class="eul-label">Cores</div><div class="eul-val" id="eul-cpu-cores">0</div></div>
+            <div><div class="eul-label">Temp</div><div class="eul-val" id="eul-cpu-temp">0°C</div></div>
+        </div>
+        <ul class="eul-proc-list" id="eul-cpu-procs">
+            </ul>
+    </div>
+
+    <div class="eul-card">
+	<div class="eul-card-title">
+            <span>Memory</span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="eul-progress-bg" style="width: 100px;margin-left:10px">
+					<div class="eul-progress-fill" id="eul-mem-bar"></div>
+				</div>
+                <strong id="eul-mem-total" style="color: white;">0 GB</strong> 
+            </div>
+        </div>
+        <div class="eul-grid-4">
+            <div><div class="eul-label">Usage</div><div class="eul-val" id="eul-mem-used">0%</div></div>
+            <div><div class="eul-label">Free</div><div class="eul-val" id="eul-mem-free">0%</div></div>            
+            <div><div class="eul-label">Cached</div><div class="eul-val" id="eul-mem-cache">0 GB</div></div>
+            <div><div class="eul-label">Active</div><div class="eul-val" id="eul-mem-active">0 GB</div></div>
+            <div><div class="eul-label">Swap</div><div class="eul-val" id="eul-mem-swap">0 GB</div></div>
+            <div><div class="eul-label">Temp</div><div class="eul-val">N/A</div></div>
+        </div>
+    </div>
+
+    <div class="eul-card">
+        <div class="eul-card-title">
+            <span>Battery</span>
+            <span id="eul-bat-percent">100%</span>
+        </div>
+        <div class="eul-grid-4" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+            <div><div class="eul-label">Health</div><div class="eul-val" id="eul-bat-health">0%</div></div>
+            <div><div class="eul-label">Max Cap.</div><div class="eul-val" id="eul-bat-max">0 mAh</div></div>
+            <div><div class="eul-label">Cycle Count</div><div class="eul-val" id="eul-bat-cycles">0</div></div>
+            <div><div class="eul-label">Condition</div><div class="eul-val" id="eul-bat-cond">Good</div></div>
+        </div>
+    </div>
+
+    <div class="eul-card" style="flex-direction: row; justify-content: space-between; align-items: center;height:94px;">
+        <div class="eul-card-title" style="margin: 0;">Network</div>
+        <div class="eul-grid-2">
+            <div><div class="eul-label">Out</div><div class="eul-val" id="eul-net-out">0 KB/s</div></div>
+            <div><div class="eul-label">In</div><div class="eul-val" id="eul-net-in">0 KB/s</div></div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+  <!-- Clima -->
+   <div style="gap: 12px; display: grid;margin-right:10px">
+  <div class="widget-wrapper">
+  <div class="apple-weather-widget">
+        <div class="aw-header">
+            <div>
+                <div class="aw-city" id="aw-city"></div>
+                <div class="aw-temp" id="aw-temp"></div>
+            </div>
+            <div class="aw-cond-box">
+                <div class="aw-cond-text" id="aw-icon-main"></div>
+                <div class="aw-cond-text" id="aw-desc"></div>
+                <div class="aw-cond-hl" id="aw-hl"></div>
+            </div>
+        </div>
+
+        
+		<hr class="divider">
+
+
+        <div class="aw-hourly" id="aw-hourly-container">
+        </div>
+
+        <hr class="divider">
+
+        <div class="aw-daily" id="aw-daily-container">
+        </div>
+    </div>
+</div>
+  <!-- Relógio -->
+  <div class="widget-wrapper">
+ <div class="clock-widget">
+    <div class="time-container">
+        <span id="hours-mins" class="main-time">00:00</span>
+        <span id="seconds" class="seconds">:00</span>
+    </div>
+    
+    <div class="info-bottom">
+        <p class="location-name">Curitiba, PR</p>
+        <p id="gmt-display" class="timezone">--:--</p>
+    </div>
+	
+</div>
+</div>
+<!-- Calendário -->
+ <div class="widget-wrapper">
+ <div class="mac-calendar-widget">
+    <div class="mc-left">
+        <h2 id="mc-day-name" class="mc-red-text">TUESDAY</h2>
+        <h1 id="mc-day-number">23</h1>
+        <p class="mc-events-text">No events today</p>
+    </div>
+
+    <div class="mc-right">
+        <h2 id="mc-month-name" class="mc-red-text">APRIL</h2>
+        
+        <div class="mc-grid-header">
+            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+        </div>
+        
+        <div id="mc-calendar-days" class="mc-grid-numbers">
+            </div>
+    </div>
+</div>
+</div>
+</div>
+
+</div>
+<script>
+
+// Invoca os módulos nativos do Node.js
+const fs = require('fs');
+const path = require('path');
+const si = require('systeminformation');
+const { ipcRenderer } = require('electron');
+
+ // O motor do Node lê o JSON fisicamente do disco em tempo de execução
+//const config = require('./config.json');
+//const apiKey = config.OPENWEATHER_API_KEY;
+
+// 1. SEGURANÇA: Restaura a leitura dinâmica do config.json
+    const apiKey = "f3119795fc40d1cab912a99eeb0c4c9d"; // Substitua pela sua chave válida
+
+    const iconPath = './assets/mac-os-weather-icons/'; // Ajuste o caminho se necessário
+
+const iconMap = {
+    "01d": "sem-nuvens.png",
+    "01n": "sem-nuvens-noite.png",
+    "02d": "pouco-nublado.png",
+    "02n": "parialmente-nublado-noite.png",
+    "03d": "nublado.png",
+    "03n": "nublado.png",
+    "04d": "nublado.png",
+    "04n": "nublado.png",
+    "09d": "garoa.png",
+    "09n": "garoa-noite.png",
+    "10d": "chuva.png",
+    "10n": "garoa-noite.png",
+    "11d": "trovoada.png",
+    "11n": "trovoada.png",
+    "13d": "neve.png",
+    "13n": "neve.png",
+    "50d": "nevoa.png",
+    "50n": "nevoa.png"
+};
+
+    function formatHour(timestamp, timezoneOffsetSeconds) {
+        const date = new Date((timestamp + timezoneOffsetSeconds) * 1000);
+        return new Intl.DateTimeFormat('pt-BR', {
+            hour: 'numeric', hour12: false, timeZone: 'UTC'
+        }).format(date) + "h";
+    }
+
+    function getDayName(timestamp, timezoneOffsetSeconds) {
+        const date = new Date((timestamp + timezoneOffsetSeconds) * 1000);
+        return new Intl.DateTimeFormat('pt-BR', { weekday: 'short', timeZone: 'UTC' }).format(date).charAt(0).toUpperCase() + new Intl.DateTimeFormat('pt-BR', { weekday: 'short', timeZone: 'UTC' }).format(date).slice(1).replace(".", "");
+    }
+
+    async function fetchWeather() {
+        // 2. INFRAESTRUTURA: Fallback rígido para Curitiba caso a geolocalização do Electron falhe
+        const lat = -25.375659;
+        const lon = -49.254046;
+
+        try {
+            // CORREÇÃO CRÍTICA: Removemos o 'daily' do exclude para receber a previsão semanal
+            const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&lang=pt_br&exclude=minutely,alerts&appid=${apiKey}`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("Erro HTTP: " + res.status);
+            const data = await res.json();
+
+            // Busca nome da cidade
+            const geoUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&lang=pt_br&limit=1&appid=${apiKey}`;
+            const geoRes = await fetch(geoUrl);
+            const geoData = await geoRes.json();
+            const city = geoData[0]?.name || "Localização";
+
+            // 3. INJEÇÃO DO HEADER (Mapeando para as novas classes do HTML)
+            document.getElementById("aw-city").textContent = city;
+            document.getElementById("aw-temp").textContent = `${Math.round(data.current.temp)}°`;
+            document.getElementById("aw-desc").textContent = data.current.weather[0].description.charAt(0).toUpperCase() + data.current.weather[0].description.slice(1);
+            document.getElementById("aw-hl").textContent = `H:${Math.round(data.daily[0].temp.max)}° L:${Math.round(data.daily[0].temp.min)}°`;
+
+            // Troca a tag de imagem por um elemento de texto para suportar seus emojis
+            // Localize onde você atualiza o ícone principal e substitua por isso:
+const mainIconName = iconMap[data.current.weather[0].icon] || "nublado.png";
+const mainIconContainer = document.getElementById("aw-icon-main");
+
+// Mantendo a estrutura, mas injetando a imagem
+mainIconContainer.innerHTML = `<img src="${iconPath}${mainIconName}" style="width: 32px; height: 32px; object-fit: contain;">`;
+
+            
+            // 4. PREVISÃO HORÁRIA (Hourly)
+            const sunrise = data.current.sunrise;
+const sunset = data.current.sunset;
+const timezoneOffset = data.timezone_offset;
+
+// 4. PREVISÃO HORÁRIA (Hourly)
+let hourlyData = data.hourly.slice(0, 12); // Aumentei para 12h para garantir que pegamos o evento
+
+// ALGORITMO DE INSERÇÃO: Criamos objetos falsos de "hora" para o sol
+const sunEvents = [];
+if (sunrise > hourlyData[0].dt && sunrise < hourlyData[hourlyData.length - 1].dt) {
+    sunEvents.push({ dt: sunrise, isSunEvent: true, type: 'sunrise', label: 'Nascer do Sol' });
+}
+if (sunset > hourlyData[0].dt && sunset < hourlyData[hourlyData.length - 1].dt) {
+    sunEvents.push({ dt: sunset, isSunEvent: true, type: 'sunset', label: 'Pôr do Sol' });
+}
+
+// Mescla, ordena por tempo e pega os primeiros 6 itens para o display
+const finalTimeline = [...hourlyData, ...sunEvents]
+    .sort((a, b) => a.dt - b.dt)
+    .slice(0, 6); 
+
+const hourlyContainer = document.getElementById("aw-hourly-container");
+
+hourlyContainer.innerHTML = finalTimeline.map((item, index) => {
+    // Se for um evento solar
+    if (item.isSunEvent) {
+        const icon = item.type === 'sunrise' ? 'nascer-do-sol.png' : 'por-do-sol.png';
+        return `
+            <div class="aw-hour-block">
+                <span class="aw-hour-time">${formatHour(item.dt, timezoneOffset)}</span>
+                <img src="${iconPath}${icon}" style="width: 20px; height: 20px;">
+                <span class="aw-hour-temp" style="font-size: 10px;">${item.label}</span>
+            </div>
+        `;
+    }
+
+    // Se for uma hora normal (seu código original adaptado)
+    const hrIcon = iconMap[item.weather[0].icon] || "nublado.png";
+    const displayHour = formatHour(item.dt, timezoneOffset);
+    return `
+        <div class="aw-hour-block">
+            <span class="aw-hour-time">${displayHour}</span>
+            <img src="${iconPath}${hrIcon}" style="width: 20px; height: 20px;">
+            <span class="aw-hour-temp">${Math.round(item.temp)}°</span>
+        </div>
+    `;
+}).join('');
+
+            // 5. O ALGORITMO DAS BARRAS DE TEMPERATURA (Daily)
+            const dailyData = data.daily.slice(1, 6); // Próximos 5 dias
+
+            // Passo A: Descobrir o limite absoluto de temperatura da semana inteira
+            const allMinTemps = dailyData.map(d => d.temp.min);
+            const allMaxTemps = dailyData.map(d => d.temp.max);
+            const weekMin = Math.min(...allMinTemps);
+            const weekMax = Math.max(...allMaxTemps);
+            const weekRange = weekMax - weekMin; // Amplitude térmica total da semana
+
+            const dailyContainer = document.getElementById("aw-daily-container");
+
+            dailyContainer.innerHTML = dailyData.map(day => {
+                const dayMin = Math.round(day.temp.min);
+                const dayMax = Math.round(day.temp.max);
+
+				const dayIcon = iconMap[day.weather[0].icon] || "nublado.png";
+                // Passo B: Calcular a geometria da barra
+                // Onde a barra começa (Margem Esquerda %)
+                const leftPercent = ((dayMin - weekMin) / weekRange) * 100;
+                // Qual o tamanho da barra (Largura %)
+                const widthPercent = ((dayMax - dayMin) / weekRange) * 100;
+
+                return `
+                <div class="aw-day-row">
+                    <span class="aw-day-name">${getDayName(day.dt, timezoneOffset)}</span>
+                    <span style="font-size: 0.8rem;"><img src="${iconPath}${dayIcon}" style="width: 18px; height: 18px;"></span>
+                    <span class="aw-day-min">${dayMin}°</span>
+                    <div class="aw-temp-bar">
+                        <div class="aw-temp-fill" style="left: ${leftPercent}%; width: ${widthPercent}%;"></div>
+                    </div>
+                    <span class="aw-day-max">${dayMax}°</span>
+                </div>
+            `;
+            }).join('');
+
+        } catch (e) {
+            console.error("Erro na esteira de clima:", e);
+        }
+    }
+
+    // Inicia o widget
+    fetchWeather();
+    // Atualiza a cada 30 min silenciosamente
+    setInterval(fetchWeather, 1800000);
+  function updateClock() {
+        const now = new Date();
+        
+        // 1. Atualiza Horas e Minutos
+        const hm = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('hours-mins').textContent = hm;
+        
+        // 2. Atualiza Segundos
+        const s = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = `:` + s;
+
+        // 3. Calcula e exibe o GMT Local (Racional e Automático)
+        const offset = now.getTimezoneOffset(); // Retorna em minutos (ex: 180 para -3h)
+        const absOffset = Math.abs(offset);
+        const hours = Math.floor(absOffset / 60);
+        const minutes = absOffset % 60;
+        const sign = offset <= 0 ? "+" : "-";
+        
+        const gmtString = `${sign}${hours}:${minutes.toString().padStart(2, '0')}`;
+        document.getElementById('gmt-display').textContent = gmtString;
+    }
+
+    // Executa a cada segundo para precisão total
+    setInterval(updateClock, 1000);
+    updateClock(); // Chamada inicial imediata
+	
+	
+
+async function generateMacCalendar() {
+    const now = new Date();
+    const month = now.getMonth();
+    const year = now.getFullYear();
+    const today = now.getDate();
+
+    const dayNames = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+    const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+    
+    document.getElementById('mc-day-name').textContent = dayNames[now.getDay()];
+    document.getElementById('mc-day-number').textContent = today;
+    document.getElementById('mc-month-name').textContent = monthNames[month];
+
+    const todayStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(today).padStart(2, '0')}`;
+    const eventsContainer = document.querySelector('.mc-events-text');
+
+    try {
+        // 1. Solicita ao main.js a pasta de configuração do Linux (~/.config/seu-app)
+        const userDataPath = await ipcRenderer.invoke('get-user-path');
+        
+        // 2. Monta o caminho absoluto blindado
+        const eventsPath = path.join(userDataPath, 'events.json');
+        
+        // 3. Auto-Cura: Se o arquivo não existir (primeira vez rodando), cria a estrutura vazia
+        if (!fs.existsSync(eventsPath)) {
+            fs.writeFileSync(eventsPath, JSON.stringify([]), 'utf8');
+        }
+
+        // 4. Lê o arquivo da pasta segura
+        const eventsData = await fs.promises.readFile(eventsPath, 'utf8');
+        const events = JSON.parse(eventsData); 
+
+        const todayEvents = events.filter(e => e.date === todayStr);
+
+        if (todayEvents.length > 0) {
+            eventsContainer.innerHTML = todayEvents.map(e => `• ${e.title}`).join('<br>');
+            eventsContainer.style.color = '#ffffff'; 
+        } else {
+            eventsContainer.textContent = "No events today";
+            eventsContainer.style.color = '#98989d';
+        }
+        
+    } catch (err) {
+        console.error("Falha na esteira de eventos:", err);
+        eventsContainer.textContent = "Erro na leitura de eventos";
+        eventsContainer.style.color = '#ff453a'; 
+    }
+
+    // Cálculos da Grade do Calendário mantidos intactos...
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const grid = document.getElementById('mc-calendar-days');
+    
+    grid.innerHTML = "";
+
+    for (let i = 0; i < firstDay; i++) {
+        grid.innerHTML += `<span></span>`;
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const isToday = d === today ? 'mc-current-day' : '';
+        grid.innerHTML += `<span class="${isToday}">${d}</span>`;
+    }
+}
+
+generateMacCalendar();
+setInterval(generateMacCalendar, 3600000);
+	
+	
+
+
+
+
+
+function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+async function updateEulWidget() {
+    try {
+        const [cpu, temp, mem, battery, netInt, procs] = await Promise.all([
+            si.currentLoad(),
+            si.cpuTemperature(),
+            si.mem(),
+            si.battery(),
+            si.networkInterfaces(),
+            si.processes()
+        ]);
+
+        // --- CPU ---
+        const cpuTotal = cpu.currentLoad.toFixed(1);
+        document.getElementById('eul-cpu-total').textContent = `${cpuTotal}%`;
+        document.getElementById('eul-cpu-bar').style.width = `${cpuTotal}%`;
+        document.getElementById('eul-cpu-sys').textContent = `${cpu.currentLoadSystem.toFixed(1)}%`;
+        document.getElementById('eul-cpu-user').textContent = `${cpu.currentLoadUser.toFixed(1)}%`;
+        document.getElementById('eul-cpu-cores').textContent = cpu.cpus.length;
+        document.getElementById('eul-cpu-temp').textContent = temp.main ? `${Math.round(temp.main)}°C` : 'N/A';
+
+        // Processos da CPU
+        const topProcs = procs.list.sort((a, b) => b.cpu - a.cpu).slice(0, 5);
+        document.getElementById('eul-cpu-procs').innerHTML = topProcs.map(p => `
+            <li class="eul-proc-item">
+                <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;">${p.name}</span>
+                <span style="color: white; font-weight: 500;">${p.cpu.toFixed(1)}</span>
+            </li>
+        `).join('');
+
+        // --- MEMORY ---
+        const totalGb = (mem.total / 1e9).toFixed(2);
+        const usedGb = (mem.active / 1e9).toFixed(2);
+        const freeGb = (mem.available / 1e9).toFixed(2);
+        
+        document.getElementById('eul-mem-total').textContent = `${totalGb} GB`;
+        document.getElementById('eul-mem-used').textContent = `${usedGb} GB`;
+        document.getElementById('eul-mem-free').textContent = `${freeGb} GB`;
+        document.getElementById('eul-mem-bar').style.width = `${(mem.active / mem.total) * 100}%`;
+        
+        // Tradução da semântica Linux
+        document.getElementById('eul-mem-cache').textContent = `${(mem.buffcache / 1e9).toFixed(2)} GB`;
+        document.getElementById('eul-mem-active').textContent = `${(mem.active / 1e9).toFixed(2)} GB`;
+        document.getElementById('eul-mem-swap').textContent = `${(mem.swapused / 1e9).toFixed(2)} GB`;
+
+        // --- BATTERY ---
+        if (battery.hasBattery) {
+            document.getElementById('eul-bat-percent').textContent = `${battery.percent}%`;
+            document.getElementById('eul-bat-health').textContent = battery.health ? `${battery.health}%` : 'N/A';
+            document.getElementById('eul-bat-max').textContent = battery.maxcapacity ? `${battery.maxcapacity} mAh` : 'N/A';
+            document.getElementById('eul-bat-cycles').textContent = battery.cyclecount || '0';
+        } else {
+            document.getElementById('eul-bat-percent').textContent = 'N/A (Desktop)';
+        }
+
+        // --- NETWORK ---
+        // Pega a interface principal para ler a taxa de transferência
+        const defaultNet = await si.networkInterfaceDefault();
+        const netStats = await si.networkStats(defaultNet);
+        if (netStats && netStats.length > 0) {
+            document.getElementById('eul-net-out').textContent = `${formatBytes(netStats[0].tx_sec)}/s`;
+            document.getElementById('eul-net-in').textContent = `${formatBytes(netStats[0].rx_sec)}/s`;
+        }
+
+    } catch (err) {
+        console.error("Erro na esteira Eul:", err);
+    }
+}
+
+updateEulWidget();
+setInterval(updateEulWidget, 2000);
+</script>
+</body>
+</html>
